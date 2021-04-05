@@ -1,27 +1,22 @@
-import styled from 'styled-components';
-import Nav from 'components/Nav';
 import {
   HashRouter as Router,
   Switch,
   Route,
   Redirect
 } from "react-router-dom";
+import Layout from 'components/Layout';
+import React from "react";
+import Tags from "views/Tags";
+import Money from "views/Money";
+import Statistics from "views/Statistics";
+import NoMatch from "views/NoMatch";
 
-const Wrapper = styled.div`
-  min-height: 100vh;
-  display:flex;
-  flex-direction:column;
-`
-const Main = styled.div`
-flex-grow:1;
-`
+
 
 
  function App() {
   return (
     <Router>
-      <Wrapper>
-        <Main>
           <Switch>
             <Redirect exact from="/" to="/money"/>
             <Route path="/tags">
@@ -36,33 +31,17 @@ flex-grow:1;
             <Route path="*">
               <NoMatch />
             </Route>
-          </Switch>
-        </Main>
-        <Nav />
-        
-
-        
-      </Wrapper>
+          </Switch> 
     </Router>
   );
 }
 
-function Statistics() {
-  return <h2>统计</h2>;
-}
 
-function Tags() {
-  return <h2>标签</h2>;
-}
 
-function Money() {
-  return <h2>记账</h2>;
-}
 
-function NoMatch(){
-  return(
-    <div>404</div>
-  )
-}
+
+
+
+
 
 export default App;
