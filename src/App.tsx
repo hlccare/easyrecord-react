@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+import Nav from 'components/Nav';
+import {
+  HashRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from "react-router-dom";
 
-function App() {
+const Wrapper = styled.div`
+  min-height: 100vh;
+  display:flex;
+  flex-direction:column;
+`
+const Main = styled.div`
+flex-grow:1;
+`
+
+
+ function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Wrapper>
+        <Main>
+          <Switch>
+            <Redirect exact from="/" to="/money"/>
+            <Route path="/tags">
+              <Tags />
+            </Route>
+            <Route path="/money">
+              <Money />
+            </Route>
+            <Route path="/statistics">
+              <Statistics />
+            </Route>
+            <Route path="*">
+              <NoMatch />
+            </Route>
+          </Switch>
+        </Main>
+        <Nav />
+        
+
+        
+      </Wrapper>
+    </Router>
   );
+}
+
+function Statistics() {
+  return <h2>统计</h2>;
+}
+
+function Tags() {
+  return <h2>标签</h2>;
+}
+
+function Money() {
+  return <h2>记账</h2>;
+}
+
+function NoMatch(){
+  return(
+    <div>404</div>
+  )
 }
 
 export default App;
