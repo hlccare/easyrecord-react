@@ -101,7 +101,10 @@
   },
   "devDependencies": {
     "@types/react-router-dom": "^5.1.7",
-    "@types/styled-components": "^5.1.9"
+    "@types/styled-components": "^5.1.9",
+    "@types/webpack-env": "^1.16.0",
+    "svg-sprite-loader": "^4.2.2",
+    "svgo-loader": "^2.2.1"
   },
   "jest": {
     "roots": [
