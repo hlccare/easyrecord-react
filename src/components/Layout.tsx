@@ -11,13 +11,13 @@ const Main = styled.div`
 flex-grow:1;
 `
 
-const Layout = (props:any)=>{
+const Layout = (props: any) => {
     return (
         <Wrapper>
-        <Main>
-            {props.children}
-        </Main>
-        <Nav/>
+            <Main className={props.className}>
+                {props.children}
+            </Main>
+            <Nav />
         </Wrapper>
     )
 }

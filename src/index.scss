@@ -30,7 +30,15 @@ body {
 button{
   font-family: inherit;
 }
+:focus{
+  outline: none;
+}
 .icon {
   height: 1em;
   width: 1em;
+}
+.clearfix{
+  content: '';
+  display: block;
+  clear: both;
 }
