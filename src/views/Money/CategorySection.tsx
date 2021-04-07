@@ -25,22 +25,23 @@ const Wrapper = styled.section`
     }
   }
 `
-const CategorySection:React.FunctionComponent = () =>{
-  const categoryMap = {'-':'支出','+':'收入'}
+const CategorySection: React.FunctionComponent = () => {
+  const categoryMap = { '-': '支出', '+': '收入' }
   type Keys = keyof typeof categoryMap
-  const [categoryList] = useState<Keys[]>(['-','+'])
-  const [category,setCategory] = useState('-')
+  const [categoryList] = useState<Keys[]>(['-', '+'])
+  const [category, setCategory] = useState('-')
   return (
     <Wrapper>
       <ul>
         {
-          categoryList.map(c=>
-            <li 
-              className={category=== c ?'selected':''}
-              onClick={()=>setCategory(c)}
+          categoryList.map(c =>
+            <li
+              key={c}
+              className={category === c ? 'selected' : ''}
+              onClick={() => setCategory(c)}
             >
               {categoryMap[c]}
-            </li>  
+            </li>
           )
         }
       </ul>

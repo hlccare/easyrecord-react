@@ -4,7 +4,6 @@ import {
   Route,
   Redirect
 } from "react-router-dom";
-import Layout from 'components/Layout';
 import React from "react";
 import Tags from "views/Tags";
 import Money from "views/Money";
