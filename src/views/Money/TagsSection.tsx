@@ -1,3 +1,4 @@
+import { createId } from "lib/createId";
 import { useState } from "react";
 import styled from "styled-components";
 import { useTags } from "useTags";
@@ -46,7 +47,7 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
         const tagName = window.prompt('请输入标签名')
         if (tagName) {
 
-            setTags([...tags, { id: Math.random(), name: tagName }])
+            setTags([...tags, { id: createId(), name: tagName }])
         }
     }
     const onToggleTag = (tagId: number) => {
