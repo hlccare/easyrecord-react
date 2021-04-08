@@ -30,9 +30,19 @@ const InputWrapper = styled.div`
 
 
 const Tag: React.FunctionComponent = () => {
-    const {findTag} = useTags()
-    let {id} = useParams<Params>();
-    const tag = findTag(parseInt(id))
+    const {findTag,updateTag,deleteTag} = useTags()
+    let {id:idString} = useParams<Params>();
+    const tag = findTag(parseInt(idString));
+    const tagContent = (tag: {id:number,name:string}) => (
+        <div>
+            <InputWrapper>
+                <Input label='标签名' type='text' placeholder='标签名' value={tag.name}
+                onChange={(e)=>{
+                    updateTag(tag.id,{name:e.target.value})
+                }}/>
+            </InputWrapper>
+        </div>
+    )
     return (
         <Layout>
             <Topbar>
@@ -40,14 +50,12 @@ const Tag: React.FunctionComponent = () => {
                 <span>编辑标签</span>
                 <Icon />
             </Topbar>
-            <InputWrapper>
-                <Input label='标签名' type='text' placeholder='标签名' value={tag.name}/>
-            </InputWrapper>
+            {tag ? tagContent(tag) : <Center>tag不存在</Center>}
             
             <Center>
                 <Space />
                 <Space />
-                <Button>删除标签</Button>
+                <Button onClick={()=>deleteTag(tag.id)}>删除标签</Button>
             </Center>
         </Layout>
     )

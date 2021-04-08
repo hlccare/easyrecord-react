@@ -3,7 +3,6 @@ import { Center } from "components/Center";
 import Icon from "components/Icon";
 import Layout from "components/Layout";
 import { Space } from "components/Space";
-import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { useTags } from "useTags";
@@ -24,12 +23,8 @@ const TagList = styled.ol`
   }
 `
 
-
-
-
-
 function Tags() {
-  const { tags, setTags } = useTags()
+  const { tags } = useTags()
   return (
     <Layout>
       <TagList>
