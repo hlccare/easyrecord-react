@@ -7,7 +7,7 @@ import { Space } from "components/Space"
 import React from "react"
 import { useParams, useHistory } from "react-router"
 import styled from "styled-components"
-import { useTags } from "useTags"
+import { useTags } from "hooks/useTags"
 
 type Params = {
     id: string
