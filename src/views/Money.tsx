@@ -36,15 +36,19 @@ function Money() {
     })
   }
   const submit = () => {
+    console.log('submit')
     if (addRecord(selected)) {
       window.alert('保存成功')
       setSelected(defaultFormData);
+      console.log('set selected default')
       return true;
     }
+    console.log('return false')
     return false;
   }
   return (
     <MyLayout>
+      {JSON.stringify(selected)}
       <TagsSection value={selected.tagIds}
         onChange={tagIds => onChange({ tagIds })} />
       <NoteSection value={selected.note}

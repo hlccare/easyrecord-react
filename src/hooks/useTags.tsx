@@ -20,7 +20,7 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
     //tags变化
     useUpdate(() => {
         window.localStorage.setItem('tags', JSON.stringify(tags))
-    }, [tags])
+    }, tags)
     const findTag = (id: number) => tags.filter(t => t.id === id)[0]
     const findTagIndex = (id: number) => {
         let index = -1

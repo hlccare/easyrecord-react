@@ -7,7 +7,6 @@ import { useRecords } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import dayjs from 'dayjs';
 import { RecordItem } from '../hooks/useRecords';
-import { Tag } from "./Tag";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -39,7 +38,7 @@ function Statistics() {
   const hash: { [key: string]: RecordItem[] } = {}
   const selectedRecords = records.filter(r => r.category === category)
 
-  selectedRecords.map(r => {
+  selectedRecords.forEach(r => {
     const key = dayjs(r.createdAt).format('YYYY-MM-DD')
     if (!(key in hash)) {
       hash[key] = []
