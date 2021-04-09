@@ -10,30 +10,21 @@ const defaultTags = [
 
 const useTags = () => { // 使用useState，然后暴露读写接口，就是封装一个自定义hook
     const [tags, setTags] = useState<{ id: number, name: string }[]>(defaultTags)
-    const findTag = (id:number)=> tags.filter(t=>t.id === id)[0]
-    const findTagIndex = (id:number) =>{
+    const findTag = (id: number) => tags.filter(t => t.id === id)[0]
+    const findTagIndex = (id: number) => {
         let index = -1
-        for(let i=0;i<tags.length;i++){
+        for (let i = 0; i < tags.length; i++) {
             index = i
             break;
         }
         return index;
     }
-    const updateTag = (id:number, obj:{name:string}) =>{
-        //获取要改的tag的下标
-        const index = findTagIndex(id);
-        //深拷贝tags得到tagsClone
-        const tagsClone = JSON.parse(JSON.stringify(tags))
-        //tagsClone
-        tagsClone.splice(index,1,{id:id,name:obj.name})
-        setTags(tagsClone);
+    const updateTag = (id: number, { name }: { name: string }) => {
+        setTags(tags.map(tag => tag.id === id ? { id, name: name } : tag))
     }
 
-    const deleteTag = (id:number) =>{
-        const index = findTagIndex(id);
-        const tagsClone = JSON.parse(JSON.stringify(tags))
-        tagsClone.splice(index, 1)
-        setTags(tagsClone)
+    const deleteTag = (id: number) => {
+        setTags(tags.filter(tag => tag.id !== id))
     }
 
     return {
