@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { Wrapper } from "./NumberPadSection/Wrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { useState } from 'react';
@@ -6,12 +6,12 @@ import { useState } from 'react';
 type Props = {
   value: number,
   onChange: (value: number) => void,
-  onOk?: () => boolean
+  onOk?: () => void
 }
 const NumberPadSection: React.FunctionComponent<Props> = (props) => {
   // const output = props.value.toString()
   const [output, _setOutput] = useState(props.value.toString());
-  const setOutput = (output: string) => {
+  const setOutput = useCallback((output: string) => {
     let newOutput: string;
     if (output.length > 16) {
       newOutput = output.slice(0, 16)
@@ -22,15 +22,17 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
     }
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput))
-  }
+  },[props])
+  useEffect(()=>{if(props.value === 0&&output!=='0'){setOutput('0')}},[props.value,setOutput,output])
+
   const onClickButtonWrapper = (e: React.MouseEvent<HTMLDivElement>) => {
     const text = (e.target as HTMLButtonElement).textContent
     if (text === null) {
       return;
     }
     if (text === 'OK') {
-      if (props.onOk) {
-        if (props.onOk()) setOutput('0');
+       if (props.onOk) {
+        props.onOk()
       }
       return;
     }
