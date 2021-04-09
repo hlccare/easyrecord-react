@@ -6,7 +6,7 @@ import { useState } from 'react';
 type Props = {
   value: number,
   onChange: (value: number) => void,
-  onOk?: () => void
+  onOk?: () => boolean
 }
 const NumberPadSection: React.FunctionComponent<Props> = (props) => {
   // const output = props.value.toString()
@@ -30,7 +30,7 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
     }
     if (text === 'OK') {
       if (props.onOk) {
-        props.onOk()
+        if (props.onOk()) setOutput('0');
       }
       return;
     }

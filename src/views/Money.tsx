@@ -19,8 +19,12 @@ const defaultFormData = {
   note: '',
   category: '-' as Category,
   amount: 0,
-  createdAt: ''
+  createdAt: new Date().toISOString()
 }
+
+const CategoryWrapper = styled.div`
+    background: #c4c4c4;
+`
 
 function Money() {
   const [selected, setSelected] = useState(defaultFormData)
@@ -34,8 +38,10 @@ function Money() {
   const submit = () => {
     if (addRecord(selected)) {
       window.alert('保存成功')
-      setSelected(defaultFormData)
+      setSelected(defaultFormData);
+      return true;
     }
+    return false;
   }
   return (
     <MyLayout>
@@ -43,9 +49,11 @@ function Money() {
         onChange={tagIds => onChange({ tagIds })} />
       <NoteSection value={selected.note}
         onChange={note => onChange({ note })} />
-      <CategorySection value={selected.category}
-        onChange={category => onChange({ category })}>
-      </CategorySection>
+      <CategoryWrapper>
+        <CategorySection value={selected.category}
+          onChange={category => onChange({ category })}>
+        </CategorySection>
+      </CategoryWrapper>
       <NumberPadSection value={selected.amount}
         onChange={amount => onChange({ amount })}
         onOk={submit}>

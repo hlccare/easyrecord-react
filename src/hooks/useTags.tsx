@@ -30,6 +30,12 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
         }
         return index;
     }
+
+    const getName = (id: number) => {
+        const tag = tags.filter(t => t.id === id)[0]
+        return tag ? tag.name : '';
+    }
+
     const updateTag = (id: number, { name }: { name: string }) => {
         setTags(tags.map(tag => tag.id === id ? { id, name: name } : tag))
     }
@@ -48,7 +54,7 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
     }
 
     return {
-        tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag
+        tags, setTags, findTag, findTagIndex, getName, updateTag, deleteTag, addTag
     }
 }
 
