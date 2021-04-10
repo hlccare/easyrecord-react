@@ -1,6 +1,7 @@
 {
   "name": "easyrecord-react",
   "version": "0.1.0",
+  "homepage": "https://hlccare.github.io/easyrecord-react-website/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
@@ -28,6 +29,7 @@
     "dayjs": "^1.10.4",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "echarts": "^5.0.2",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -81,7 +83,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "deploy:github": "sh scripts/deploy_github.sh",
+    "deploy:gitee": "sh scripts/deploy_gitee.sh"
   },
   "eslintConfig": {
     "extends": [
@@ -103,6 +107,7 @@
   },
   "devDependencies": {
     "@types/classnames": "2.2.6",
+    "@types/echarts": "^4.9.7",
     "@types/react-router-dom": "^5.1.7",
     "@types/styled-components": "^5.1.9",
     "@types/webpack-env": "^1.16.0",
