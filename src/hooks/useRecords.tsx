@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useUpdate } from "./useUpdate"
+import {createRecordId} from 'lib/createId'
 
 export type RecordItem = {
+    id: number,
     tagIds: number[],
     note: string,
     category: '+' | '-',
@@ -23,7 +25,7 @@ const useRecords = () => {
             window.alert('请选择标签')
             return false;
         }
-        setRecords([...records, record])
+        setRecords([...records, { ...record,id:createRecordId()}])
         return true;
     }
     useUpdate(() => {

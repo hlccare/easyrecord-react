@@ -63,12 +63,12 @@ function Statistics() {
           onChange={category => setCategory(category)} />
       </CategoryWrapper>
       {array.map(([date, records]) =>
-        <div>
+        <div key={date}>
           <Header>{date}</Header>
           <div>
             {records.map(r => {
               return (
-                <Item>
+                <Item key={r.id}>
                   <div className="tag oneLine">
                     {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)
                       .reduce((result, span, index, array) => result.concat(index < array.length - 1 ? [span, ','] : [span]), [] as ReactNode[])}

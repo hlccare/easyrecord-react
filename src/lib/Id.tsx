@@ -1,5 +1,5 @@
 let id = 0
-class Id {
+class TagId {
     value: number;
     constructor() {
         id += 1
@@ -7,4 +7,13 @@ class Id {
     }
 }
 
-export { Id }
+let recordId = 0
+class RecordId{
+    value: number;
+    constructor(){
+        recordId += 1
+        this.value = recordId
+    }
+}
+
+export { TagId, RecordId }

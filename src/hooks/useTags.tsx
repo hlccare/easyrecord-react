@@ -1,5 +1,5 @@
 import { useUpdate } from "hooks/useUpdate";
-import { createId } from "lib/createId";
+import { createTagId } from "lib/createId";
 import { useEffect, useState } from "react";
 
 const useTags = () => { // 使用useState，然后暴露读写接口，就是封装一个自定义hook
@@ -9,10 +9,10 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
         let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]')
         if (localTags.length === 0) {
             localTags = [
-                { id: createId(), name: '衣' },
-                { id: createId(), name: '食' },
-                { id: createId(), name: '住' },
-                { id: createId(), name: '行' }
+                { id: createTagId(), name: '衣' },
+                { id: createTagId(), name: '食' },
+                { id: createTagId(), name: '住' },
+                { id: createTagId(), name: '行' }
             ]
         }
         setTags(localTags)
@@ -47,7 +47,7 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
     const addTag = () => {
         const tagName = window.prompt('请输入标签名')
         if (tagName) {
-            setTags([...tags, { id: createId(), name: tagName }])
+            setTags([...tags, { id: createTagId(), name: tagName }])
         } else {
             window.alert('标签名不可为空')
         }

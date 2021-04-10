@@ -23,7 +23,9 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput))
   },[props])
-  useEffect(()=>{if(props.value === 0&&output!=='0'){setOutput('0')}},[props.value,setOutput,output])
+  useEffect(()=>{
+    if(props.value === 0&&output!=='0'){setOutput('0')
+  }},[props.value,setOutput,output])
 
   const onClickButtonWrapper = (e: React.MouseEvent<HTMLDivElement>) => {
     const text = (e.target as HTMLButtonElement).textContent
@@ -36,7 +38,7 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
       }
       return;
     }
-    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text))
+    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text)>=0)
       setOutput(generateOutput(text, output))
   }
   return (
