@@ -9,10 +9,6 @@ import dayjs from 'dayjs';
 import { RecordItem } from '../hooks/useRecords';
 import {expenseTagsList,incomeTagsList} from 'instants/tagsList'
 import Icon from "components/Icon";
-import { Chart } from "components/Chart";
-import _ from 'lodash'
-import { OverviewChart } from "./Statistics/OverviewChart";
-import { PieChart } from "./Statistics/PieChart";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -45,7 +41,7 @@ const Header = styled.h3`
   justify-content: space-between;
 `
 
-function Statistics() {
+function Detail() {
   const [category, setCategory] = useState<'-' | '+'>('-')
   const { records, deleteRecord } = useRecords()
   // const { getName } = useTags()
@@ -73,7 +69,21 @@ function Statistics() {
     }
   })
 
-  
+  const beautify  = (string: string) => {
+    const day = dayjs(string);
+    const now = dayjs();
+    if (dayjs(string).isSame(now, "day")) {
+      return "今天";
+    } else if (day.isSame(now.subtract(1, "day"), "day")) {
+      return "昨天";
+    } else if (day.isSame(now.subtract(2, "day"), "day")) {
+      return "前天";
+    } else if (day.isSame(now, "year")) {
+      return day.format("MM月D日");
+    } else {
+      return day.format("YYYY年MM月DD日");
+    }
+  }
 
   return (
     <Layout>
@@ -81,9 +91,41 @@ function Statistics() {
         <CategorySection value={category}
           onChange={category => setCategory(category)} />
       </CategoryWrapper>
-      <OverviewChart />
-      <PieChart category={category}/>
+      {array.map(([date, {records,sum}]) =>
+        <div key={date}>
+          <Header>
+          <span>
+            {beautify(date)}
+          </span>
+          <span>
+            ￥{sum}
+          </span>
+          </Header>
+          
+          <div>
+            {records.map(r => {
+              return (
+                <Item key={r.id}>
+                  <div className="tag oneLine">
+                    {/* {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)
+                      .reduce((result, span, index, array) => result.concat(index < array.length - 1 ? [span, ','] : [span]), [] as ReactNode[])} */}
+                    <span>{(r.category==='-'?expenseTagsList:incomeTagsList).find(tag=>tag.id===r.tagId)?.name}</span>
+                  </div>
+                  {r.note && <div className="note">
+                    {r.note}
+                  </div>}
+                    <Icon name='delete' onClick={()=>deleteRecord(r.id)}/>
+                  <div className="amount">
+                    ￥{r.amount}
+                  </div>
+                </Item>
+              )
+            })}
+          </div>
+        </div>
+      )}
+
     </Layout>
   );
 }
-export default Statistics;
+export { Detail };

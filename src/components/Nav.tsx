@@ -39,7 +39,7 @@ const Nav = () => {
       <ul>
         <li>
 
-          <NavLink to="/tags" activeClassName="selected"><Icon name='label' />标签</NavLink>
+          <NavLink to="/detail" activeClassName="selected"><Icon name='label' />明细</NavLink>
         </li>
         <li>
 

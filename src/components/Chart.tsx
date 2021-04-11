@@ -1,24 +1,28 @@
-import echarts, { EChartOption, ECharts } from 'echarts'
-import { useRef, useEffect } from 'react';
+import echarts, {EChartOption, ECharts} from 'echarts';
+
+import React, {useEffect, useRef} from 'react';
+import styled from 'styled-components';
+
 type Props = {
-    option: EChartOption;
-    loading: boolean;
+  option?: EChartOption,
+  className?: string
 }
 
-const Chart: React.FunctionComponent<Props> = (props) => {
-    const { option, loading } = props
-    const container = useRef<HTMLDivElement>(null)
-    const chart = useRef<HTMLCanvasElement>(null)
-    useEffect(() => {
-        const width = document.documentElement.clientWidth
-        if (container.current) {
-            const chart: ECharts = echarts.init(container.current, 'dark')
-            chart.setOption(props.option)
-        }
-    }, [props.option]) //mounted
-    return (
-        <div ref={container}></div>
-    )
-}
+const Main = styled.div`
+  height: 360px;
+`;
 
-export { Chart }
+const Chart: React.FC<Props> = (props) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (props.option === undefined) {return console.error('options 为空');}
+    const chart: ECharts = echarts.init(ref.current as HTMLDivElement);
+    chart.setOption(props.option);
+  }, [props.option]);
+  return (
+    <Main ref={ref} className={props.className}>
+
+    </Main>
+  );
+};
+export {Chart};
