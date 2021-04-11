@@ -13,6 +13,7 @@ import { Chart } from "components/Chart";
 import _ from 'lodash'
 import { OverviewChart } from "./Statistics/OverviewChart";
 import { PieChart } from "./Statistics/PieChart";
+import { NaiveTabBar } from "components/NaiveTabBar";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -47,6 +48,7 @@ const Header = styled.h3`
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
+  const [temp,setTemp] = useState<string>('-')
   const { records, deleteRecord } = useRecords()
   // const { getName } = useTags()
   // const hash: { [key: string]: RecordItem[] } = {}
@@ -73,10 +75,19 @@ function Statistics() {
     }
   })
 
+  const TabBarWrapper = styled.div`
+
+  `
   
 
   return (
     <Layout>
+      <TabBarWrapper>
+
+      <NaiveTabBar value={temp} 
+      mapList={[{'all':'概览'},{ '-': '支出'},{ '+': '收入' }]}
+      onChange={value => setTemp(value)}/>
+      </TabBarWrapper>
       <CategoryWrapper>
         <CategorySection value={category}
           onChange={category => setCategory(category)} />
