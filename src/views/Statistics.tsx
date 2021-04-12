@@ -7,13 +7,14 @@ import { useRecords } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import dayjs from 'dayjs';
 import { RecordItem } from '../hooks/useRecords';
-import {expenseTagsList,incomeTagsList} from 'instants/tagsList'
+import { expenseTagsList, incomeTagsList } from 'instants/tagsList'
 import Icon from "components/Icon";
 import { Chart } from "components/Chart";
 import _ from 'lodash'
 import { OverviewChart } from "./Statistics/OverviewChart";
 import { PieChart } from "./Statistics/PieChart";
 import { NaiveTabBar } from "components/NaiveTabBar";
+import { CategoryStatistics } from "./Statistics/CategoryStatistics";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -46,20 +47,39 @@ const Header = styled.h3`
   justify-content: space-between;
 `
 
+const TabBarWrapper = styled.div`
+      font-size: 1.3em;
+      padding: 4px 16px;
+        background: white;
+    >ul{
+      height: 100%;
+      >li{
+        padding: 10px 24px;
+        &.selected{
+          background: #9ccac0;
+          color: white;
+          border-radius: 10px;
+        }
+
+      }
+    }
+
+  `
+
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
-  const [temp,setTemp] = useState<string>('-')
-  const { records, deleteRecord } = useRecords()
+  const [extendCategory, setExtendCategory] = useState<string>('all')
+  const { records, getTotalByCategory } = useRecords()
   // const { getName } = useTags()
   // const hash: { [key: string]: RecordItem[] } = {}
-  const hash: { [key: string]: {records:RecordItem[],sum:number }} = {}
+  const hash: { [key: string]: { records: RecordItem[], sum: number } } = {}
 
   const selectedRecords = records.filter(r => r.category === category)
 
   selectedRecords.forEach(r => {
     const key = dayjs(r.createdAt).format('YYYY-MM-DD')
     if (!(key in hash)) {
-      hash[key] = {records:[],sum:0}
+      hash[key] = { records: [], sum: 0 }
     }
     hash[key].records.push(r)
     hash[key].sum += r.amount
@@ -75,25 +95,26 @@ function Statistics() {
     }
   })
 
-  const TabBarWrapper = styled.div`
 
-  `
-  
+  const onChange = (value: string) => {
+    setExtendCategory(value);
+    if (value === '-') {
+      setCategory('-')
+    } else if (value === '+') {
+      setCategory('+')
+    }
+  }
 
   return (
     <Layout>
       <TabBarWrapper>
 
-      <NaiveTabBar value={temp} 
-      mapList={[{'all':'概览'},{ '-': '支出'},{ '+': '收入' }]}
-      onChange={value => setTemp(value)}/>
+        <NaiveTabBar value={extendCategory}
+          mapList={[{ 'all': '概览' }, { '-': '支出' }, { '+': '收入' }]}
+          onChange={onChange} />
       </TabBarWrapper>
-      <CategoryWrapper>
-        <CategorySection value={category}
-          onChange={category => setCategory(category)} />
-      </CategoryWrapper>
-      <OverviewChart />
-      <PieChart category={category}/>
+
+      {extendCategory === 'all' ? <OverviewChart /> : <CategoryStatistics category={category} />}
     </Layout>
   );
 }

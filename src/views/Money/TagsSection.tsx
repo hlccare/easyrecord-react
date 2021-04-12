@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useTags } from "hooks/useTags";
-import { expenseTagsList,incomeTagsList } from "instants/tagsList";
+import { expenseTagsList, incomeTagsList } from "instants/tagsList";
 import Icon from "components/Icon";
 
 
@@ -13,6 +13,7 @@ const Wrapper = styled.section`
       display:flex;
       flex-wrap: wrap;
       overflow-y:auto;
+      &::-webkit-scrollbar {display:none}
       position: absolute;
       height: 100%;
       padding: 4px;
@@ -43,7 +44,7 @@ const Wrapper = styled.section`
     `
 type Props = {
     value: number;
-    category:string;
+    category: string;
     onChange: (selected: number) => void;
 }
 const TagsSection: React.FunctionComponent<Props> = (props) => {
@@ -60,8 +61,8 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
         // } else {
         //     props.onChange([...selectedTagIds, tagId])
         // }
-        if(tagId === selectedTagId)return;
-        else{
+        if (tagId === selectedTagId) return;
+        else {
             props.onChange(tagId);
         }
     }
@@ -74,7 +75,7 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
                         onClick={() => { selectTag(tag.id) }}
                         className={getClass(tag.id)}
                     >
-                        <Icon name={tag.iconName}/>
+                        <Icon name={tag.iconName} />
                         {tag.name}
                     </li>
                 )}

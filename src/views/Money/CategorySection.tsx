@@ -2,13 +2,13 @@ import { useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.section`
-  font-size:24px;
+  font-size:20px;
   >ul{
     display:flex;
     >li{
       width: 50%;
       text-align: center;
-      padding:16px 0;
+      padding:10px 0;
       position: relative;
       &.selected::after{
         border: 1pxs solid red;

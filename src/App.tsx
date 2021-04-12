@@ -31,7 +31,11 @@ function App() {
           <Route exact path="/tags" >
             <Tags />
           </Route> */}
+
           <Route exact path="/detail">
+            <Detail />
+          </Route>
+          <Route exact path="/detail/:categoryParam" >
             <Detail />
           </Route>
           <Route exact path="/money">

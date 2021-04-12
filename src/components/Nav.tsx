@@ -23,31 +23,39 @@ box-shadow: 0 0 3px rgba(0,0,0,0.25);
           height: 24px;
       }
       &.selected{
-        color:red;
+        color:white;
+        background: #9ccac0;
         .icon{
-          fill: red;
+          fill: white;
         }
       }
     }
   }
 }
 `
+
 const Nav = () => {
   return (
 
     <NavWrapper>
       <ul>
         <li>
+          <NavLink to="/detail" activeClassName="selected">
+            <Icon name='label' />明细
+          </NavLink>
 
-          <NavLink to="/detail" activeClassName="selected"><Icon name='label' />明细</NavLink>
+        </li>
+        <li>
+          <NavLink to="/money" activeClassName="selected">
+            <Icon name='money' />记账
+          </NavLink>
         </li>
         <li>
 
-          <NavLink to="/money" activeClassName="selected"><Icon name='money' />记账</NavLink>
-        </li>
-        <li>
+          <NavLink to="/statistics" activeClassName="selected">
 
-          <NavLink to="/statistics" activeClassName="selected"><Icon name='statistic' />统计</NavLink>
+            <Icon name='statistic' />统计
+          </NavLink>
         </li>
       </ul>
     </NavWrapper>

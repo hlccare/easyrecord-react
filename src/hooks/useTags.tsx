@@ -1,7 +1,7 @@
 import { useUpdate } from "hooks/useUpdate";
 import { createTagId } from "lib/createId";
 import { useEffect, useState } from "react";
-import {expenseTagsList, incomeTagsList} from 'instants/tagsList'
+import { expenseTagsList, incomeTagsList } from 'instants/tagsList'
 
 const useTags = () => { // 使用useState，然后暴露读写接口，就是封装一个自定义hook
     const [tags, setTags] = useState<{ id: number, name: string }[]>([])
@@ -53,13 +53,17 @@ const useTags = () => { // 使用useState，然后暴露读写接口，就是封
             window.alert('标签名不可为空')
         }
     }
-    const getTagNameById = (id:number) =>{
-        const tagsList = id.toString()[0] === '1'?expenseTagsList:incomeTagsList
-        return tagsList.filter(r=>r.id === id)[0].name
+    const getTagNameById = (id: number) => {
+        const tagsList = id.toString()[0] === '1' ? expenseTagsList : incomeTagsList
+        return tagsList.filter(r => r.id === id)[0].name
+    }
+    const getIconNameById = (id: number) => {
+        const tagsList = id.toString()[0] === '1' ? expenseTagsList : incomeTagsList
+        return tagsList.filter(r => r.id === id)[0].iconName
     }
     return {
         tags, setTags, findTag, findTagIndex, getName, updateTag, deleteTag, addTag,
-        getTagNameById
+        getTagNameById, getIconNameById
     }
 }
 

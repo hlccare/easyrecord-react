@@ -4,7 +4,7 @@ import { Input } from "components/Input";
 
 const Wrapper = styled.section`
   background: #f5f5f5;
-  padding: 14px 16px;
+  padding: 4px 16px;
   font-size: 14px;
 `
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 }
 const DateSection: React.FunctionComponent<Props> = (props) => {
   const note = props.value
-  const onchange:ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onchange: ChangeEventHandler<HTMLInputElement> = (e) => {
     props.onChange(e.target.value)
   }
   return (

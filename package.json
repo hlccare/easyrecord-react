@@ -114,7 +114,8 @@
     "@types/styled-components": "^5.1.9",
     "@types/webpack-env": "^1.16.0",
     "svg-sprite-loader": "^4.2.2",
-    "svgo-loader": "^2.2.1"
+    "svgo-loader": "^2.2.1",
+    "typescript-plugin-styled-components": "^1.5.0"
   },
   "jest": {
     "roots": [
