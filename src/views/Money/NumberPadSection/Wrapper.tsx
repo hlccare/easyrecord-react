@@ -1,12 +1,16 @@
 import styled from "styled-components";
 
+const heightNormal: number = 64;
+const heightSmall: number = 48;
+
 const Wrapper = styled.section`
+  font-size: 1.5em;
   display: flex;
   flex-direction:column;
   >.output{
     background:white;
     font-size: 36px;
-    line-height: 72px;
+    line-height: 60px;
     text-align:right;
     padding: 0 16px;
     box-shadow: inset 0 -5px 5px -5px rgba(0,0,0,0.25),
@@ -16,11 +20,17 @@ const Wrapper = styled.section`
     >button{
       float: left;
       width: 25%;
-      height: 64px;
+      height: ${heightNormal}px;
       border:none;
+      @media (max-height:700px){
+        height: ${heightSmall}px;
+      }
       &.ok{
         float: right;
-        height: 128px;
+        height: ${heightNormal * 2}px;
+        @media (max-height:700px){
+          height: ${heightSmall * 2}px;
+        }
       }
       &.zero{
         width: 50%;

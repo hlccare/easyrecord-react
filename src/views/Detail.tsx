@@ -1,4 +1,3 @@
-import Layout from "components/Layout";
 import React, { ReactNode } from "react";
 import { CategorySection } from "./Money/CategorySection";
 import { useState } from 'react';
@@ -7,10 +6,10 @@ import { useRecords } from 'hooks/useRecords';
 import { useTags } from 'hooks/useTags';
 import dayjs from 'dayjs';
 import { RecordItem } from '../hooks/useRecords';
-import { expenseTagsList, incomeTagsList } from 'instants/tagsList'
 import Icon from "components/Icon";
-import classnames from 'classnames';
 import { useParams } from 'react-router';
+import { Image } from "components/Image";
+import { FlexLayout } from "components/FlexLayout";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -25,9 +24,10 @@ const Item = styled.div`
   align-items: stretch;
   >.iconWrapper{
     margin-right: 8px;
+    padding: 3px;
     .icon{
-      width: 3em;
-      height: 3em;
+      width: 2.5em;
+      height: 2.5em;
     }
   }
   >.contentWrapper{
@@ -35,7 +35,7 @@ const Item = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    overflow:hidden;
+    overflow:auto;
     .upper{
       line-height: 1.2em;
       font-size: 1.2em;
@@ -55,7 +55,7 @@ const Item = styled.div`
       >.deleteIconWrapper{
         margin-left: auto;
         >.icon{
-          font-size: 1emm;
+          font-size: 1em;
         }
       }
     }
@@ -67,6 +67,26 @@ const Header = styled.h3`
   padding: 10px 16px;
   display:flex;
   justify-content: space-between;
+  border-bottom: 1px solid #e2e1e1; 
+`
+
+const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  margin-top: 32px;;
+`
+const Tip = styled.span`
+  margin-top: 4px;
+  color: grey;
+`
+
+const ContentWrapper = styled.div`
+  flex-grow: 1;
+  overflow: auto;
+  height: 0;
+  &::-webkit-scrollbar {display:none}
 `
 
 type Params = {
@@ -77,10 +97,6 @@ const Detail: React.FunctionComponent = (props) => {
   const [category, setCategory] = useState<'-' | '+'>(categoryParam || '-')
   const { records, deleteRecord } = useRecords()
   const { getIconNameById, getTagNameById } = useTags()
-  console.log(categoryParam)
-  console.log(category)
-  // const { getName } = useTags()
-  // const hash: { [key: string]: RecordItem[] } = {}
   const hash: { [key: string]: { records: RecordItem[], sum: number } } = {}
 
   const selectedRecords = records.filter(r => r.category === category)
@@ -123,59 +139,70 @@ const Detail: React.FunctionComponent = (props) => {
 
 
   return (
-    <Layout>
+    <FlexLayout>
+
       <CategoryWrapper>
         <CategorySection value={category}
           onChange={category => setCategory(category)} />
       </CategoryWrapper>
-      {array.map(([date, { records, sum }]) =>
-        <div key={date}>
-          <Header>
-            <span>
-              {beautify(date)}
-            </span>
-            <span>
-              ￥{sum}
-            </span>
-          </Header>
+      <ContentWrapper>
 
-          <div>
-            {records.map(r => {
-              return (
-                <Item key={r.id}>
-                  <div className='iconWrapper'>
-                    <Icon name={getIconNameById(r.tagId)} />
+        {array.map(([date, { records, sum }]) =>
+          <div key={date}>
+            <Header>
+              <span>
+                {beautify(date)}
+              </span>
+              <span>
+                ￥{sum}
+              </span>
+            </Header>
 
-                  </div>
-                  <div className='contentWrapper'>
-                    <div className="upper">
-                      <div className="tag oneLine">
-                        {/* {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)
+            <div>
+              {records.map(r => {
+                return (
+                  <Item key={r.id}>
+                    <div className='iconWrapper'>
+                      <Icon name={getIconNameById(r.tagId)} />
+
+                    </div>
+                    <div className='contentWrapper'>
+                      <div className="upper">
+                        <div className="tag oneLine">
+                          {/* {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)
                           .reduce((result, span, index, array) => result.concat(index < array.length - 1 ? [span, ','] : [span]), [] as ReactNode[])} */}
-                        <span>{getTagNameById(r.tagId)}</span>
+                          <span>{getTagNameById(r.tagId)}</span>
+                        </div>
+                        <div className="amount">
+                          ￥{r.amount}
+                        </div>
                       </div>
-                      <div className="amount">
-                        ￥{r.amount}
+                      <div className="lower">
+                        {r.note && <div className="note oneLine">
+                          {r.note}
+                        </div>}
+                        <div className='deleteIconWrapper'>
+                          <Icon name='delete' onClick={() => deleteRecord(r.id)} />
+                        </div>
                       </div>
                     </div>
-                    <div className="lower">
-                      {r.note && <div className="note oneLine">
-                        {r.note}
-                      </div>}
-                      <div className='deleteIconWrapper'>
-                        <Icon name='delete' onClick={() => deleteRecord(r.id)} />
-                      </div>
-                    </div>
-                  </div>
 
-                </Item>
-              )
-            })}
+                  </Item>
+                )
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        {array.length === 0 ?
+          <ImageWrapper>
+            <Image name='no-data' />
+            <Tip>暂无数据</Tip>
+          </ImageWrapper> : null
+        }
+      </ContentWrapper>
 
-    </Layout>
+    </FlexLayout>
+
   );
 }
 export { Detail };

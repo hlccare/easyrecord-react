@@ -12,17 +12,17 @@ const Main = styled.div`
 flex-grow:1;
 `
 type Props = {
-    className?:string;
-    scrollTop?:number;
+    className?: string;
+    scrollTop?: number;
 }
-const Layout:React.FunctionComponent<Props> = (props) => {
+const Layout: React.FunctionComponent<Props> = (props) => {
     const mainRef = useRef<HTMLDivElement>(null)
-    useEffect(()=>{
-        setTimeout(() => {   
-            if(!mainRef.current){return;}
+    useEffect(() => {
+        setTimeout(() => {
+            if (!mainRef.current) { return; }
             mainRef.current.scrollTop = props.scrollTop! //!表名不可能为空
         }, 0);
-    },[props.scrollTop])
+    }, [props.scrollTop])
     return (
         <Wrapper>
             <Main ref={mainRef}

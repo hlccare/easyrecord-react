@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { useTags } from "hooks/useTags";
 import { expenseTagsList, incomeTagsList } from "instants/tagsList";
 import Icon from "components/Icon";
 
 
 const Wrapper = styled.section`
   background: #FFFFFF;
-  /* padding: 12px 16px; */
   flex-grow: 1;
   position: relative;
   >ol{
@@ -18,6 +16,7 @@ const Wrapper = styled.section`
       height: 100%;
       padding: 4px;
       > li {
+      color: grey;
       border-radius: 10%;
       display: flex;
       flex-direction: column;
@@ -30,14 +29,17 @@ const Wrapper = styled.section`
       }
 
       &.selected {
-        background: grey;
+        background: #dfdddd;
+        color: black;
+        font-weight: 530;
       }
 
       >.icon {
         // height: 32px;
         // width:32px;
-        height: 60%;
-        width: 60%;
+        height: 45%;
+        width: 45%;
+        margin-bottom: 4px;
       }
     }
     }
@@ -53,14 +55,6 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
     const selectedTagId = props.value
 
     const selectTag = (tagId: number) => {
-        // const index = selectedTagId.indexOf(tagId)
-        // if (index >= 0) {
-        //     props.onChange(
-        //         selectedTagIds.filter(t => t !== tagId)
-        //     )
-        // } else {
-        //     props.onChange([...selectedTagIds, tagId])
-        // }
         if (tagId === selectedTagId) return;
         else {
             props.onChange(tagId);
