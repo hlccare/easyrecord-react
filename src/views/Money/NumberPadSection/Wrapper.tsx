@@ -8,6 +8,7 @@ const Wrapper = styled.section`
   display: flex;
   flex-direction:column;
   >.output{
+    color: #129e6f;
     background:white;
     font-size: 36px;
     line-height: 60px;
@@ -18,10 +19,11 @@ const Wrapper = styled.section`
   }
   >.pad{
     >button{
+      background: white;
       float: left;
       width: 25%;
       height: ${heightNormal}px;
-      border:none;
+      border: 1px solid #d1cece;
       @media (max-height:700px){
         height: ${heightSmall}px;
       }
@@ -35,7 +37,9 @@ const Wrapper = styled.section`
       &.zero{
         width: 50%;
       }
-      &:nth-child(1){
+      &.ok{
+      }
+      /* &:nth-child(1){
         background: #f2f2f2;
       }
       &:nth-child(2),
@@ -57,7 +61,7 @@ const Wrapper = styled.section`
       }
       &:nth-child(14){
         background: #A9A9A9;
-      }
+      } */
     }
   }
 `
