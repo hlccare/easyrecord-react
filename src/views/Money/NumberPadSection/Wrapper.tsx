@@ -24,8 +24,13 @@ const Wrapper = styled.section`
       width: 25%;
       height: ${heightNormal}px;
       border: 1px solid #d1cece;
+      border-bottom:none;
+      border-left: none;
       @media (max-height:700px){
         height: ${heightSmall}px;
+      }
+      &.backspace{
+        fill: #f85f4b;
       }
       &.ok{
         float: right;
@@ -38,6 +43,11 @@ const Wrapper = styled.section`
         width: 50%;
       }
       &.ok{
+      }
+      &:nth-child(4),
+      &:nth-child(8),
+      &:nth-child(12){
+        border-right: none;
       }
       /* &:nth-child(1){
         background: #f2f2f2;

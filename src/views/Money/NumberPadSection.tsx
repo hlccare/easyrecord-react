@@ -2,6 +2,7 @@ import React, { useCallback, useEffect } from 'react';
 import { Wrapper } from "./NumberPadSection/Wrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { useState } from 'react';
+import Icon from 'components/Icon';
 
 type Props = {
   value: number,
@@ -22,10 +23,12 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
     }
     _setOutput(newOutput);
     props.onChange(parseFloat(newOutput))
-  },[props])
-  useEffect(()=>{
-    if(props.value === 0&&output!=='0'){setOutput('0')
-  }},[props.value,setOutput,output])
+  }, [props])
+  useEffect(() => {
+    if (props.value === 0 && output !== '0') {
+      setOutput('0')
+    }
+  }, [props.value, setOutput, output])
 
   const onClickButtonWrapper = (e: React.MouseEvent<HTMLDivElement>) => {
     const text = (e.target as HTMLButtonElement).textContent
@@ -33,12 +36,12 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
       return;
     }
     if (text === 'OK') {
-       if (props.onOk) {
+      if (props.onOk) {
         props.onOk()
       }
       return;
     }
-    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text)>=0)
+    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0)
       setOutput(generateOutput(text, output))
   }
   return (
@@ -50,11 +53,11 @@ const NumberPadSection: React.FunctionComponent<Props> = (props) => {
         <button>1</button>
         <button>2</button>
         <button>3</button>
-        <button>删除</button>
+        <button className='backspace'><Icon name='backspace' /></button>
         <button>4</button>
         <button>5</button>
         <button>6</button>
-        <button>清空</button>
+        <button>清零</button>
         <button>7</button>
         <button>8</button>
         <button>9</button>

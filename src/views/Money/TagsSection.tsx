@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { expenseTagsList, incomeTagsList } from "instants/tagsList";
 import Icon from "components/Icon";
+import { useEffect } from 'react';
 
 
 const Wrapper = styled.section`
@@ -54,6 +55,13 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
     const tagList = props.category === '-' ? expenseTagsList : incomeTagsList;
     const selectedTagId = props.value
 
+    useEffect(() => {
+        console.log('set height')
+        var height = document.getElementById('wrapper')!.clientHeight;
+        document.getElementById('wrapper')!.style.height = height + 'px';
+    }, [])
+
+
     const selectTag = (tagId: number) => {
         if (tagId === selectedTagId) return;
         else {
@@ -62,7 +70,7 @@ const TagsSection: React.FunctionComponent<Props> = (props) => {
     }
     const getClass = (tagId: number) => selectedTagId === tagId ? 'selected' : '';
     return (
-        <Wrapper>
+        <Wrapper id='wrapper'>
             <ol>
                 {tagList.map(tag =>
                     <li key={tag.id}

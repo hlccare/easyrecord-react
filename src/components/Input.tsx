@@ -8,7 +8,6 @@ const Label = styled.label`
       white-space: nowrap;
     }
     >input{
-      display:block;
       width: 100%;
       height:44px;
       background: none;
@@ -16,18 +15,18 @@ const Label = styled.label`
     }
 `
 type Props = {
-    label:string;
+    label: string;
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-const Input: React.FunctionComponent<Props> = (props) =>{
+const Input: React.FunctionComponent<Props> = (props) => {
 
-    const {label, children, ...rest} = props;
+    const { label, children, ...rest } = props;
     return (
         <Label>
             <span>{props.label}</span>
-            <input {...rest}/>
+            <input {...rest} />
         </Label>
     )
 }
 
-export {Input}
+export { Input }
