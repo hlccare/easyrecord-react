@@ -11,6 +11,9 @@ const generateOutput = (text: string, output = '0') => {
         case '7':
         case '8':
         case '9':
+            if (output.indexOf('.') >= 0 && output.split('.')[1].length >= 2) {
+                return output
+            }
             if (output === '0') {
                 return text
             } else {

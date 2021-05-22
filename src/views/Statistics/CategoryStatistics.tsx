@@ -14,10 +14,11 @@ const ContentWrapper = styled.div`
 const AmountWrapper = styled.div`
         text-align: center;
     >.mark{
-        font-size: 20px;
+        font-size: 1.25em;
     }
     >.amount{
-        font-size: 25px;
+        font-size: 1.5em;
+        margin-top: 0.5em;
     }
     button{
         background: #9ccac0
@@ -29,13 +30,8 @@ const CategoryStatistics: React.FunctionComponent<Props> = (props) => {
     const { getTotalByCategory } = useRecords();
     return (
         <ContentWrapper>
-            <Space />
-            <Space />
-            <Space />
-            <Space />
             <AmountWrapper>
                 <div className="mark">{category === '-' ? '支出' : '收入'}总计</div>
-                <Space />
                 <div className="amount">￥{getTotalByCategory(category)}</div>
                 <NavLink to={`/detail/${category}`}>
                     <Button>查看明细</Button>

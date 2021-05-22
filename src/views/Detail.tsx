@@ -10,6 +10,7 @@ import Icon from "components/Icon";
 import { useParams } from 'react-router';
 import { Image } from "components/Image";
 import { FlexLayout } from "components/FlexLayout";
+import { Dialog } from "components/Dialog";
 
 const CategoryWrapper = styled.div`
     background: white;
@@ -101,6 +102,27 @@ const Detail: React.FunctionComponent = (props) => {
 
   const selectedRecords = records.filter(r => r.category === category)
 
+  const [visible, setVisible] = useState(false)
+
+  const [idProcess, setIdProcess] = useState(-1)
+
+  let type = 'parent';
+
+  const onClickDelete = (id: number) => {
+    setVisible(true)
+    setIdProcess(id)
+  }
+
+  const onCloseForDialog = () => {
+    setVisible(false)
+  }
+  const okHandler = () => {
+    (idProcess !== -1) && deleteRecord(idProcess) && console.log('ok')
+  }
+  const cancelHandler = () => {
+    console.log('cancel')
+  }
+
   selectedRecords.forEach(r => {
     const key = dayjs(r.createdAt).format('YYYY-MM-DD')
     if (!(key in hash)) {
@@ -182,7 +204,7 @@ const Detail: React.FunctionComponent = (props) => {
                           {r.note}
                         </div>}
                         <div className='deleteIconWrapper'>
-                          <Icon name='delete' onClick={() => deleteRecord(r.id)} />
+                          <Icon name='delete' onClick={() => onClickDelete(r.id)} />
                         </div>
                       </div>
                     </div>
@@ -200,6 +222,7 @@ const Detail: React.FunctionComponent = (props) => {
           </ImageWrapper> : null
         }
       </ContentWrapper>
+      <Dialog type='confirm' visible={visible} onClose={onCloseForDialog} okHandler={okHandler} cancelHandler={cancelHandler} header='提示' content='确认删除此条记录？' />
 
     </FlexLayout>
 

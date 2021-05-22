@@ -8,6 +8,7 @@ import { useRecords } from "hooks/useRecords";
 import { DateSection } from "./Money/DateSection";
 import dayjs from "dayjs";
 import { FlexLayout } from "components/FlexLayout";
+import { Dialog } from 'components/Dialog';
 
 type Category = '-' | '+'
 
@@ -33,12 +34,22 @@ function Money() {
       ...obj
     })
   }
+  const [visible, setVisible] = useState(false);
   const submit = () => {
     console.log('submit')
     if (addRecord(selected)) {
-      window.alert('保存成功')
+      setVisible(true)
       setSelected(defaultFormData)
     }
+  }
+  const onCloseForDialog = () => {
+    setVisible(false)
+  }
+  const okHandler = () => {
+    console.log('ok')
+  }
+  const cancelHandler = () => {
+    console.log('cancel')
   }
   return (
     <FlexLayout>
@@ -56,6 +67,7 @@ function Money() {
         onChange={amount => onChange({ amount })}
         onOk={submit}>
       </NumberPadSection>
+      <Dialog type='alert' visible={visible} onClose={onCloseForDialog} okHandler={okHandler} cancelHandler={cancelHandler} header='提示' content='保存成功' />
     </FlexLayout >
   )
 }

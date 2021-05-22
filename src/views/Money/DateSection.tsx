@@ -5,7 +5,7 @@ import dayjs from "dayjs";
 
 const Wrapper = styled.section`
   background: #f5f5f5;
-  padding: 4px 16px;
+  padding: 2px 16px;
   font-size: 14px;
 `
 type Props = {
@@ -22,7 +22,7 @@ const DateSection: React.FunctionComponent<Props> = (props) => {
     <Wrapper>
       <Input label='日期' type='date'
         placeholder='请选择日期'
-        max = {today}
+        max={today}
         value={note}
         onChange={onchange}
       />

@@ -27,6 +27,13 @@ const TabBarWrapper = styled.div`
     }
 
   `
+const ContentWrapper = styled.div`
+  flex-grow:1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+`
 
 function Statistics() {
   const [category, setCategory] = useState<'-' | '+'>('-')
@@ -62,8 +69,11 @@ function Statistics() {
           mapList={[{ 'all': '概览' }, { '-': '支出' }, { '+': '收入' }]}
           onChange={onChange} />
       </TabBarWrapper>
+      <ContentWrapper>
 
-      {extendCategory === 'all' ? <OverviewChart /> : <CategoryStatistics category={category} />}
+        {extendCategory === 'all' ? <OverviewChart /> : <CategoryStatistics category={category} />}
+      </ContentWrapper>
+
     </FlexLayout>
   );
 }
