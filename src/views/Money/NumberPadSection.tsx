@@ -2,7 +2,6 @@ import React, { useCallback, useEffect } from 'react';
 import { Wrapper } from "./NumberPadSection/Wrapper";
 import { generateOutput } from "./NumberPadSection/generateOutput";
 import { useState } from 'react';
-import Icon from 'components/Icon';
 
 type Props = {
   value: number,

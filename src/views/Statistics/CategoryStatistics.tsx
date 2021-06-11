@@ -1,5 +1,4 @@
 import { Button } from 'components/Button';
-import { Space } from 'components/Space';
 import { useRecords } from 'hooks/useRecords';
 import styled from 'styled-components';
 import { PieChart } from './PieChart';

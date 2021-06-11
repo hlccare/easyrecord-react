@@ -1,4 +1,7 @@
-import echarts, { EChartOption, ECharts } from 'echarts';
+// import echarts, { EChartOption, ECharts } from 'echarts';
+import echarts, { EChartOption, ECharts } from "echarts/lib/echarts";
+import "echarts/lib/chart/line";
+import "echarts/lib/chart/pie";
 
 import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';

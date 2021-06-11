@@ -106,8 +106,6 @@ const Detail: React.FunctionComponent = (props) => {
 
   const [idProcess, setIdProcess] = useState(-1)
 
-  let type = 'parent';
-
   const onClickDelete = (id: number) => {
     setVisible(true)
     setIdProcess(id)
